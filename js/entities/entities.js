@@ -32,7 +32,7 @@ game.PlayerEntity = me.Entity.extend({
 		}
 
 		if(this.body.vel.x !== 0){
-		if(!this.renderable.setCurrentAnimation("walk")){
+		if(!this.renderable.isCurrentAnimation("walk")){
 			this.renderable.setCurrentAnimation("walk");
 		}
 	}else{
