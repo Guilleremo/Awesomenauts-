@@ -25,15 +25,19 @@ game.PlayerEntity = me.Entity.extend({
 			// above in setVelocity() and multiplying it by me.timer.tick.
 			//me.timer.tick makes the movement look smooth
 			this.body.vel.x += this.body.accel.x * me.timer.tick;
-			this.renderable.setCurrentAnimation("walk");
+			this.flipX(true);
 
 		}else{
 			this.body.vel.x = 0;
 		}
 
+		if(this.body.vel.x !== 0){
 		if(!this.renderable.setCurrentAnimation("walk")){
 			this.renderable.setCurrentAnimation("walk");
 		}
+	}else{
+		this.renderable.setCurrentAnimation("idle");
+	}
 
 
 
