@@ -160,7 +160,6 @@ game.EnemyBaseEntity = me.Entity.extend({
         this.health = 10;
         this.alwaysUpdate = true;
         this.body.onCollision = this.onCollision.bind(this);
-        console.log("init");
         this.type = "EnemyBaseEntity"; 
         
         this.renderable.addAnimation("idle", [0]);
@@ -198,7 +197,7 @@ game.EnemyCreep = me.Entity.extend({
             spritewidth: "32",
             spriteheight: "64",
             getShape: function(){
-                return (new me.Rect(0, 0, 32, 64)).toPolygon;
+                return (new me.Rect(0, 0, 32, 64)).toPolygon();
             }
         }]);
         this.health = 10;
@@ -214,7 +213,7 @@ game.EnemyCreep = me.Entity.extend({
     },
     
     update: function(){
-        
+        return true;
     }
 });
 
