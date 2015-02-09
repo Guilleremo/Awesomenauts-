@@ -212,7 +212,19 @@ game.EnemyCreep = me.Entity.extend({
     
     },
     
-    update: function(){
+    update: function(delta){
+    	
+
+
+    	this.body.vel.x -= this.body.accel.x * me.timer.tick;
+
+
+    	this.body.update(delta);
+        
+        
+        
+        this._super(me.Entity, "update", [delta]);
+
         return true;
     }
 });
