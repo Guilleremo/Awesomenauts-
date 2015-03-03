@@ -1,16 +1,19 @@
 game.PlayerEntity = me.Entity.extend({
     init: function(x, y, settings){
-        this.getSuper();
+        this.setSuper(x, y);
         this.setPlayerTimers();
         this.setAttributes();
 		this.type = "PlayerEntity";
 		
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
+
+
+		this.addAnimation();
         
 		this.renderable.setCurrentAnimation("idle");
     },
     
-    setSuper: function () {
+    setSuper: function(x, y) {
     	this._super(me.Entity, 'init', [x, y, {
             image: "player",
             width: 64,
@@ -51,7 +54,7 @@ game.PlayerEntity = me.Entity.extend({
 
     update: function(delta){
         this.now = new Date().getTime();
-        this.dead = checkIfDead();
+        this.dead = this.checkIfDead();
         this.checkKeyPressesAndMove();
         this.setAnimation();        
         me.collision.check(this, true, this.collideHandler.bind(this), true);
@@ -101,7 +104,7 @@ game.PlayerEntity = me.Entity.extend({
     jump: function(){
     	this.jumping = true;
 		this.body.vel.y -= this.body.accel.y * me.timer.tick;
-    }
+    },
 
     setAnimation: function(){
     	if(this.attacking){
@@ -132,13 +135,13 @@ game.PlayerEntity = me.Entity.extend({
 
     collideHandler: function(response){
         if(response.b.type==='EnemyBaseEntity'){
-            this.collideWithEnemyBase();
+            this.collideWithEnemyBase(response);
         }else if(response.b.type==='EnemyCreep'){
         	this.collideWithEnemyCreep(response);	
         }
     },
 
-    collideWithEnemyBase(){
+    collideWithEnemyBase: function(response){
     		var ydif = this.pos.y - response.b.pos.y;
             var xdif = this.pos.x - response.b.pos.x;
             
@@ -157,13 +160,13 @@ game.PlayerEntity = me.Entity.extend({
             }
     },
 
-    collideWithEnemyCreep: function(){
+    collideWithEnemyCreep: function(response){
     		var xdif = this.pos.x - response.b.pos.x;
         	var ydif = this.pos.x - response.b.pos.x;
 
         	this.stopMovement(xdif);
 
-        	if(this.checkAttack(xdif, ydif){
+        	if(this.checkAttack(xdif, ydif)){
 			this.hitCreep(response);
         	};
     },
@@ -201,7 +204,5 @@ game.PlayerEntity = me.Entity.extend({
 
         		response.b.loseHealth(game.data.playerAttack);
         	}
-    }
-
-});
+    });
 
