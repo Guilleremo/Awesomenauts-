@@ -5,22 +5,23 @@ game.PlayScreen = me.ScreenObject.extend({
 	onResetEvent: function() {
 		// reset the score
 		game.data.score = 0;
-                
-                me.levelDirector.loadLevel("level01");
-                //you are loading your level on the webpage 
-                
-                this.resetPlayer(0, 420);
-                
-                var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {});
-                me.game.world.addChild(gameTimerManager, 0);
+		me.levelDirector.loadLevel("level01");
+			                
+	    this.resetPlayer(0, 420);
+	            
+		var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {});
+		me.game.world.addChild(gameTimerManager, 0);
 
-                var heroTimerManager = me.pool.pull("HeroTimerManager", 0, 0, {});
-                me.game.world.addChild(heroTimerManager, 0);
+		var heroDeathManager = me.pool.pull("HeroDeathManager", 0, 0, {});
+		me.game.world.addChild(heroDeathManager, 0);
+
+		var experienceManager = me.pool.pull("ExperienceManager", 0, 0, {});
+		me.game.world.addChild(experienceManager, 0);
                 
-                me.input.bindKey(me.input.KEY.RIGHT, "right");
-                me.input.bindKey(me.input.KEY.LEFT, "left");
-                me.input.bindKey(me.input.KEY.SPACE, "jump");
-                me.input.bindKey(me.input.KEY.A, "attack");
+		me.input.bindKey(me.input.KEY.RIGHT, "right");
+		me.input.bindKey(me.input.KEY.LEFT, "left");
+		me.input.bindKey(me.input.KEY.SPACE, "jump");
+		me.input.bindKey(me.input.KEY.A, "attack");
                 
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
