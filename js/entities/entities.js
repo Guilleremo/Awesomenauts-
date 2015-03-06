@@ -83,7 +83,7 @@ game.PlayerEntity = me.Entity.extend({
             this.jump();
         }
 
-        this,attacking = me.input.isKeyPressed("attack");
+        this.attacking = me.input.isKeyPressed("attack");
     },
 
     moveRight: function(){
