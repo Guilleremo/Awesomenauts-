@@ -54,9 +54,9 @@ var game = {
 		});
 	}
 
-	me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
-
 	me.state.SPENDEXP = 112;
+	me.state.LOAD = 113;
+	me.state.NEW = 114;
 
 	// Initialize the audio.
 	me.audio.init("mp3,ogg");
@@ -85,6 +85,9 @@ var game = {
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 		me.state.set(me.state.SPENDEXP, new game.SpendExp());
+		me.state.set(me.state.LOAD, new game.LOAD());
+		me.state.set(me.state.NEW, new game.NEW());
+
 
 
 		// Start the game.
