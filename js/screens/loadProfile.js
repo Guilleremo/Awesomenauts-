@@ -1,4 +1,4 @@
-game.LoadProfile = me.ScreenObject.extend({
+game.loadProfile = me.ScreenObject.extend({
 	/**	
 	 *  action to perform on state change
 	 */
@@ -26,27 +26,6 @@ game.LoadProfile = me.ScreenObject.extend({
 			},
 
 		})));
-
-		this.handler = me.event.subscribe(me.event.KEYDOWN, function(action, keyCode, edge){
-			if(action === "F1"){
-				if(game.data.exp1 >= exp1cost){
-					game.data.exp1 += 1;
-					game.data.exp -= exp1cost;
-					me.state.change(me.state.PLAY);
-				}else{
-					console.log("not enough expirience");
-				}
-			}else if(action === "F2"){
-
-			}else if(action === "F3"){
-				
-			}else if(action === "F4"){
-				
-			}else if(action === "F5"){
-				me.state.change(me.state.PLAY);
-			}
-		});
-
 	},
 	
 	
@@ -54,6 +33,7 @@ game.LoadProfile = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
-	
+		document.getElementById("input").style.visibility = "hidden";
+		document.getElementById("load").style.visibility = "hidden";
 	}
 });

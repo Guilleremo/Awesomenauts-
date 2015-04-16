@@ -5,6 +5,8 @@ var game = {
 	data : {
 		// score
 		score : 0,
+		option1: "",
+		option2: "",
 		enemyBaseHealth: 1,
 		playerBaseHealth: 1,
 		enemyCreepHealth: 10,
@@ -13,14 +15,11 @@ var game = {
 		playerAttack: 1,
 		playerAttackTimer: 1000, 
 		enemyCreepAttackTimer: 1000, 
-		/*orcBaseDamage: 10,
-		orcBaseHealth: 100,
-		orcBaseHealth: 3,
-		orcBaseDefense: 0,*/
 		playerMoveSpeed: 5,
 		creepMoveSpeed: 5,
 		gameTimerManager: "",
 		heroDeathManager: "",
+		spearTimer: 10,
 		player: "",
 		exp: 0,
 		gold: 0,
@@ -34,7 +33,9 @@ var game = {
 		win: "",
 		pausePos: "",
 		buyscreen: "",
-		buytext: ""
+		buytext: "",
+		minimap:"",
+		miniplayer:""
 	},
 	
 	
@@ -81,17 +82,20 @@ var game = {
 		me.pool.register("HeroDeathManager", game.HeroDeathManager);
 		me.pool.register("ExperienceManager", game.ExperienceManager);
 		me.pool.register("SpendGold", game.SpendGold);
+		me.pool.register("spear", game.SpearThrow, true);
+		me.pool.register("minimap", game.MiniMap, true);
+		me.pool.register("miniplayer", game.MiniPlayerLocation, true);
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 		me.state.set(me.state.SPENDEXP, new game.SpendExp());
-		me.state.set(me.state.LOAD, new game.LOAD());
-		me.state.set(me.state.NEW, new game.NEW());
+		me.state.set(me.state.LOAD, new game.loadProfile());
+		me.state.set(me.state.NEW, new game.newProfile());
 
 
 
 		// Start the game.
-		me.state.change(me.state.MENU);
+		me.state.change(me.state.PLAY);
 	}
 };
 

@@ -1,4 +1,4 @@
-game.PlayScreen = me.ScreenObject.extend({
+ game.PlayScreen = me.ScreenObject.extend({
 	/**
 	 *  action to perform on state change
 	 */
@@ -20,6 +20,9 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		var spendGold = me.pool.pull("SpendGold", 0, 0, {});
 		me.game.world.addChild(spendGold, 0);
+
+		game.data.MiniMap = me.pool.pull("minimap", 10, 10, {});
+		me.game.world.addChild(game.data.MiniMap, 30);
  
  		me.input.bindKey(me.input.KEY.B, "buy");               
  		me.input.bindKey(me.input.KEY.Q, "skill");
@@ -29,10 +32,12 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.input.bindKey(me.input.KEY.LEFT, "left");
 		me.input.bindKey(me.input.KEY.SPACE, "jump");
 		me.input.bindKey(me.input.KEY.UP, "attack");
+		
                 
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
 		me.game.world.addChild(this.HUD);
+
 	},
 
 
@@ -48,6 +53,9 @@ game.PlayScreen = me.ScreenObject.extend({
 		game.data.player = me.pool.pull("player", x, y, {});
 		me.game.world.addChild(game.data.player, 5);
         //created a character to pop on the screen
+ 
+       game.data.miniplayer = me.pool.pull("miniplayer", 10, 10, {});
+        me.game.world.addChild(game.data.miniplayer, 31);
 	}
 
 });
